@@ -1,0 +1,51 @@
+sudo: required
+services:
+- docker
+language: go
+go:
+- 1.9
+env:
+  global:
+  - PATH=/home/travis/gopath/bin:$PATH DEBIAN_FRONTEND=noninteractive
+  - GPG_NAME=3D86849D
+  - GPG_FINGERPRINT=E37EC0B895A9AC27DC4919AB96CEB4B93D86849D
+  - secure: Z51u/gl/p/DeqxRqyUOBcQirmWEDzhX2N52LCM6xBNCQyGef+Rl4bEAK9k88wVNqljoraDPvO1R9opdBYi0OLwhU6RzkxeuCr5mWDB3D/LwaltYFbk4VvL28YevP7cIvIzrOMcZ+Q7KlR/frvknTZEjWHItHpcRlV9DVKl+AYKwv9K+MrqT9QUwVk+/KtkhX+VKf+NrWNhbXJqWxSwQCmcvp38A/x8akQZY2ciulvZ/+8oXZKLz57aSFj+bTiInm45IcLaOp3BUCq4mip8GEkC4iHZDGZ5ayzh7Lu730aqZqFZTUA4lyoOLXMtWYpVGsG3Im+lVBZjtTMs782dkG5oWlEiDTFI3CA1jelOMFWUoOuByzk+MqD3+eTCzUE7Vmny2C52cx7vi2x4NAeByJY0EzMuKmD88Kt3P2jVy0LPsAqQ6iGHHhCjKNr7eiC8AW4vj7cTKYHmwyIlKJySNqPU29STpUFcN50AKdlyV4ey/Sx+aBxkeBI/9z5G9YNHSUVb4cChXCMmnKsIisiyhHD3i8NlYaQ/4l7NeW9kcsdkQO+Ww3aKNnZMBuVwemKNjjoSldjIb+Zt72PVIPW5BnVb6BzJpBHihxGeYXi0TU+KUtrTHqUlTFjhjK6TiVhrDwfjjpZbmRIuf1QxZenExzje2YwrMkbrRumpFGXO89vE0=
+  - secure: j5kOcH0VDjrD5SWoRuxFRaEv7oUri2z4Z05pC2fdL9znXO5rDJTF2iwIzJh4iPmwxNanbkuKkgO4l4V4xbWQjHOFCVEfF6bN2b3fri5v6LKbKYNzk73vKeDEmffdzdBvk6UTNkVNzRYeKXYKzlf7uwW9fsxrmH/cq6bt9/SOuYCfYC5wccr23tkS8KliP/yU/gf5QUb+lvd6vYrOYcTvBJCwAeZkef5/TAW8+Jj6l6OvvpJ1UPvw//xR9cv7sbE32EOZw9ra+WWPCu+Fd9vqepcSmpu9GQeA8es9UalSXZ8ImRmAn6mvjB6Ku7Oywesp4+3ZEG4T2PuefyLDcdJEFUCF4GFetBbaDc8JsPIPXzo3roAUWCDH40MotYCGUll9gh66iR2uWTzygBegyEmi2OwOXDA+r9plpa1C3C/9H7ZrfT+OZN1+42JrYAUyN/CvMaLXJvEX4otH82rXDzKby2vnWNFxEogk6gsmK9GsIcLE0Cr9Fk8Dn5IqixKPCVv9UMMUkYZSxDe6Zo79OgX1AY00K5xTow1SxqkBVdNRsJMaR0TV/ZD2kkVQWv5D3aF+jd1ZforBpNxdjSZj+VpTRMGszxYLs0yxnBut3OdFA41gteHCjI++Jk9IHK6gg2sSxcSSlFbG1qe3q0akyJfhPq8tFbsX8s34Exm9zZpv4wo=
+before_install:
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then  openssl aes-256-cbc -K $encrypted_b913830a84ee_key -iv $encrypted_b913830a84ee_iv
+  -in usacloud_gpg_key.enc -out usacloud_gpg_key -d;
+  fi
+- go get -u github.com/golang/lint/golint
+script:
+- make test
+- make lint-docs
+before_deploy:
+- if [ "$TRAVIS_BRANCH" == "master" ]; then make docker-build; docker pull sacloud/rpm-build:latest;
+  docker pull sacloud/deb-build:latest; make rpm deb; fi
+- go get github.com/aktau/github-release
+- mkdir -p ~/bin
+- git clone https://github.com/github/hub.git && cd hub && script/build -o ~/bin/hub
+  && cd ..
+- echo $TRAVIS_BRANCH
+- git config --add remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+- git fetch
+- git checkout master || git checkout -b master origin/master
+- git checkout $TRAVIS_BRANCH
+- git fetch --depth=1000
+deploy:
+- provider: script
+  script: scripts/release.pl --task=upload-to-github-release && scripts/release.pl
+    --task=upload-master-to-github-release && scripts/release_homebrew.sh && scripts/release_docker_image.sh
+    && scripts/release_website.sh
+  skip_cleanup: true
+  on:
+    branch: master
+- provider: script
+  script: scripts/release.pl --task=create-pullrequest --current-branch=$TRAVIS_BRANCH
+  skip_cleanup: true
+  on:
+    all_branches: true
+    condition: "$TRAVIS_BRANCH =~ ^bump-version-.*$"
+notifications:
+  slack:
+    secure: SDNdXvz3/aq3oDuFlwKzlm2V3Mok44mum2Wbb1vnuj9cF5kyDknE/WnkNqTo/k8oKZpqQUxR+bxP/DRbMeERsvbpLF5HQ3mYfvXBB3ED3fWEh0YBweRNfc6kHE4Dx03nNYKqOcxLP/lT9x+ix3kkjASrpknm/hAs7tkH0PYgbCDkWCHEh2IgkKDjKuSxzotcwW54i3FFZR8+zqtuS5DWX6WaxIns3DM3+7D4W+bT4San1FN18nzzclIs4NR6/lAw4lQPF2+2IN2sQTKpnvue2qc/3lADxUK/Fdg5Q0ov39KqO2a92tV6xFrL7kNuAx9pAjRpeIwjxo/K8x0kUukQ1OXrrA6y+MT86fcEZ8eydIXJnRjdMfyLXtTNelqqt2E2qJT8a3NMuHDB4DI7wvn/rhJYBr87XQWbsT2YtuaI50quitaExnm0wdjKA8ETGkx6R3jNXsQ0OFFVPyM/4NHoLiTVHc9OyjL6coO8/XzaGeOH7cuz9K6NL+W3YZVQJ6WyquC8mKbWe79IHKJe1NoZSFntJ6An5wwXafyz/Lal7UB1Jl5Q+YEMDdxC+/t3ETDtwRJAyyj2RD0UpT7R5I6MfYMxM45lky8DjMZ2CELQlkgOEZp0V7yB79kxiihBmgK6x1YvDzSCgBxKfjJPF/jKls4c2cN8y+LQZyDVJXmTuwY=

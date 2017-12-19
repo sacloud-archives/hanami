@@ -1,0 +1,15 @@
+.env
+.mailmap
+
+bin/*
+
+build_docs/site
+
+package/*-build
+rpmbuild/
+repos/centos
+repos/debian
+package/*.tar.gz
+
+releases-hanami
+homebrew-hanami

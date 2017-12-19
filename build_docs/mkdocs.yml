@@ -1,0 +1,16 @@
+site_name: Hanamiドキュメント
+site_url: https://sacloud.github.io/hanami/
+site_description: Hanami日本語ドキュメント
+site_author: '@yamamoto-febc'
+repo_url: https://github.com/sacloud/hanami
+repo_name: hanami
+copyright: Copyright (C) 2017 Kazumichi Yamamoto.
+google_analytics: ['UA-63739336-4','auto']
+theme: readthedocs
+extra_css:
+  - css/extra.css
+pages:
+  - ホーム: index.md
+  - 概要: overview.md
+  - 導入ガイド: start_guide.md
+  - コマンドリファレンス: reference.md
