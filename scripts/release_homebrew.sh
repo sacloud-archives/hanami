@@ -24,7 +24,7 @@ class Usacloud < Formula
   sha256_src_linux = "${SHA256_SRC_LINUX}"
   sha256_bash_completion = "${SHA256_BASH_COMP}"
 
-  desc "Unofficial 'sacloud' - CLI client of the SakuraCloud"
+  desc "Resource monitoring and hook for the SAKURA Cloud"
   homepage "https://github.com/sacloud/hanami"
   head "https://github.com/sacloud/hanami.git"
   version hanami_version
@@ -39,7 +39,7 @@ class Usacloud < Formula
 
   option "without-completions", "Disable bash completions"
   resource "bash_completion" do
-    url "https://releases.hanami.jp/hanami/contrib/completion/bash/hanami"
+    url "https://releases.usacloud.jp/hanami/contrib/completion/bash/hanami"
     sha256 sha256_bash_completion
   end
 
