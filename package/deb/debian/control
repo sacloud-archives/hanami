@@ -1,0 +1,15 @@
+Source: hanami
+Section: admin
+Priority: extra
+Maintainer: Kazumichi Yamamoto <yamamoto.febc@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Vcs-Browser: https://github.com/sacloud/hanami
+Vcs-Git: https://github.com/sacloud/hanami.git
+Homepage: https://github.com/sacloud/hanami
+
+Package: hanami
+Architecture: all
+Depends: ${misc:Depends}
+Description: hanami
+ Resource monitoring and hook for the SAKURA Cloud

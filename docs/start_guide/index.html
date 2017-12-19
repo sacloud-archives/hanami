@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>導入ガイド - Hanamiドキュメント</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  <link href="../css/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "導入ガイド";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-63739336-4', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Hanamiドキュメント</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">ホーム</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../overview/">概要</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">導入ガイド</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#hanami">Hanami導入ガイド</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#_1">目次</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#_2">インストール</a></li>
+                
+                    <li><a class="toctree-l4" href="#macos-linux">macOS / Linux</a></li>
+                
+                    <li><a class="toctree-l4" href="#windows">Windows/その他の場合</a></li>
+                
+                    <li><a class="toctree-l4" href="#docker">Dockerを利用する場合</a></li>
+                
+                    <li><a class="toctree-l4" href="#whalebrew">whalebrewを利用する場合</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#_3">設定</a></li>
+                
+                    <li><a class="toctree-l4" href="#api">APIキーの取得</a></li>
+                
+                    <li><a class="toctree-l4" href="#api_1">APIキーの設定</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../reference/">コマンドリファレンス</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Hanamiドキュメント</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>導入ガイド</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="hanami">Hanami導入ガイド</h1>
+<hr />
+<h1 id="_1">目次</h1>
+<ul>
+<li><a href="#_2">インストール</a></li>
+<li><a href="#_3">設定</a></li>
+</ul>
+<hr />
+<h1 id="_2">インストール</h1>
+<h3 id="macos-linux">macOS / Linux</h3>
+<pre><code class="bash">curl -fsSL https://releases.usacloud.jp/hanami/repos/install.sh | sh
+</code></pre>
+
+<blockquote>
+<p>※bash_completionを有効化するには上記コマンドを実行後に再ログインしてください。</p>
+</blockquote>
+<p><code>homebrew</code>または<code>linuxbrew</code>を利用している場合は以下でもインストール可能です。</p>
+<pre><code class="bash">brew tap sacloud/hanami
+brew install sacloud/hanami
+</code></pre>
+
+<hr />
+<h3 id="windows">Windows/その他の場合</h3>
+<p>以下のリンクからバイナリーファイルをダウンロードして展開し、任意のフォルダー内に配置してください。<br />
+(PATHを通しておくと便利です)</p>
+<ul>
+<li><a href="https://github.com/sacloud/hanami/releases/latest/">https://github.com/sacloud/hanami/releases/latest/</a></li>
+</ul>
+<p><code>bash_completion</code>が利用できる場合は、以下のコマンドで<code>usacloud</code>用の<code>bash_completion</code>を導入することが出来ます。</p>
+<pre><code class="bash">curl -s -L https://releases.usacloud.jp/hanami/contrib/completion/bash/hanami &gt;&gt; ~/.bashrc
+</code></pre>
+
+<blockquote>
+<p>※bash_completionを有効化するには上記コマンドを実行後に再ログインしてください。</p>
+</blockquote>
+<hr />
+<h3 id="docker">Dockerを利用する場合</h3>
+<p><code>hanami</code>実行用イメージとして<code>sacloud/hanami</code>を公開しています。</p>
+<pre><code class="bash"># Dockerでのhanami実行例
+docker run -it --rm \
+    -e SAKURACLOUD_ACCESS_TOKEN \
+    -e SAKURACLOUD_ACCESS_TOKEN_SECRET \
+    sacloud/hanami -v
+</code></pre>
+
+<hr />
+<h3 id="whalebrew">whalebrewを利用する場合</h3>
+<p>Dockerイメージ<code>sacloud/hanami</code>は<code>whalebrew</code>でのインストール/実行に対応しています。</p>
+<pre><code class="bash"># インストール
+whalebrew install sacloud/hanami
+</code></pre>
+
+<hr />
+<h1 id="_3">設定</h1>
+<p><code>hanami</code>の実行にはさくらのクラウドのAPIキーの取得/設定が必要です。</p>
+<h2 id="api">APIキーの取得</h2>
+<p><a href="https://secure.sakura.ad.jp/cloud/">さくらのクラウドのコントロールパネル</a>からAPIキーを発行します。</p>
+<p>コントロールパネルにログインし、「さくらのクラウド(IaaS)」を選択します。</p>
+<p><img alt="apikey-01-01.png" src="../images/apikey-01-01.png" /></p>
+<p>次に以下手順でAPIキーの追加画面を表示します。</p>
+<ul>
+<li>(1) 画面右上の「設定」をクリック</li>
+<li>(2) 左側に表示されるメニューから「APIキー」を選択</li>
+<li>(3) 一覧の右上の「追加」をクリック</li>
+</ul>
+<p><img alt="apikey-01-02.png" src="../images/apikey-01-02.png" /></p>
+<p>APIキーの追加画面が表示されたら、各項目を入力して「追加」をクリックします。</p>
+<p>各項目は以下のように入力してください。</p>
+<ul>
+<li>名前 : 任意の名前を入力</li>
+<li>説明 : 任意入力</li>
+<li>アクセスレベル : <code>リソース閲覧</code>を選択</li>
+<li>他サービスへのアクセス権 : チェックなし</li>
+</ul>
+<p><img alt="apikey-01-03.png" src="../images/apikey-01-03.png" /></p>
+<p>APIキーを作成したら、以下の値を控えておいてください。</p>
+<ul>
+<li>アクセストークン</li>
+<li>アクセスシークレット</li>
+</ul>
+<p><img alt="apikey-02.png" src="../images/apikey-02.png" /></p>
+<p>以上でAPIキーの取得完了です。</p>
+<hr />
+<h2 id="api_1">APIキーの設定</h2>
+<p>APIキーは環境変数、またはコマンド実行時のオプションで指定します。</p>
+<h4 id="_4">環境変数で指定する場合</h4>
+<pre><code class="bash">export SAKURACLOUD_ACCESS_TOKEN=&lt;アクセストークン&gt;
+export SAKURACLOUD_ACCESS_TOKEN_SECRET=&lt;アクセスシークレット&gt;
+</code></pre>
+
+<h4 id="_5">コマンド実行時のオプションで指定する場合</h4>
+<pre><code class="bash">hanami --token=&lt;アクセストークン&gt; --secret=&lt;アクセスシークレット&gt;
+</code></pre>
+
+<hr />
+<p>以上で設定終了です。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../reference/" class="btn btn-neutral float-right" title="コマンドリファレンス"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../overview/" class="btn btn-neutral" title="概要"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright (C) 2017 Kazumichi Yamamoto.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../reference/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
