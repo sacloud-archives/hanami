@@ -36,15 +36,16 @@ EOL
 git config --global push.default matching
 git config user.email 'sacloud.users@gmail.com'
 git config user.name 'sacloud-bot'
-git commit -am "v${VERSION}"
+git add .
+git commit -m "v${VERSION}"
 git tag "${VERSION}"
 
 echo "Push ${VERSION} to github.com/sacloud/hanami-docker.git"
-git push --quiet -u "https://${GITHUB_TOKEN}@github.com/sacloud/hanami-docker.git" >& /dev/null
+git push -u "https://${GITHUB_TOKEN}@github.com/sacloud/hanami-docker.git"
 
 echo "Cleanup tag ${VERSION} on github.com/sacloud/hanami-docker.git"
-git push --quiet -u "https://${GITHUB_TOKEN}@github.com/sacloud/hanami-docker.git" :${VERSION} >& /dev/null
+git push -u "https://${GITHUB_TOKEN}@github.com/sacloud/hanami-docker.git" :${VERSION}
 
 echo "Tagging ${VERSION} on github.com/sacloud/hanami-docker.git"
-git push --quiet -u "https://${GITHUB_TOKEN}@github.com/sacloud/hanami-docker.git" ${VERSION} >& /dev/null
+git push -u "https://${GITHUB_TOKEN}@github.com/sacloud/hanami-docker.git" ${VERSION}
 exit 0

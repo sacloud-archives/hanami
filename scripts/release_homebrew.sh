@@ -62,15 +62,16 @@ EOL
 git config --global push.default matching
 git config user.email 'sacloud.users@gmail.com'
 git config user.name 'sacloud-bot'
-git commit -am "v${VERSION}"
+git add .
+git commit -m "v${VERSION}"
 
 echo "Push ${VERSION} to github.com/sacloud/homebrew-hanami.git"
-git push --quiet -u "https://${GITHUB_TOKEN}@github.com/sacloud/homebrew-hanami.git" >& /dev/null
+git push -u "https://${GITHUB_TOKEN}@github.com/sacloud/homebrew-hanami.git"
 
 echo "Cleanup tag v${VERSION} on github.com/sacloud/homebrew-hanami.git"
-git push --quiet -u "https://${GITHUB_TOKEN}@github.com/sacloud/homebrew-hanami.git" :v${VERSION} >& /dev/null
+git push -u "https://${GITHUB_TOKEN}@github.com/sacloud/homebrew-hanami.git" :v${VERSION}
 
 echo "Tagging v${VERSION} on github.com/sacloud/homebrew-hanami.git"
 git tag v${VERSION} 2>&1 >/dev/null
-git push --quiet -u "https://${GITHUB_TOKEN}@github.com/sacloud/homebrew-hanami.git" v${VERSION} >& /dev/null
+git push -u "https://${GITHUB_TOKEN}@github.com/sacloud/homebrew-hanami.git" v${VERSION}
 exit 0

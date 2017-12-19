@@ -37,11 +37,11 @@ git commit -m "v${VERSION}"
 git tag "${VERSION}"
 
 echo "Push ${VERSION} to github.com/sacloud/releases-hanami.git"
-git push --quiet -u "https://${GITHUB_TOKEN}@github.com/sacloud/releases-hanami.git" >& /dev/null
+git push -u "https://${GITHUB_TOKEN}@github.com/sacloud/releases-hanami.git"
 
 echo "Cleanup tag ${VERSION} on github.com/sacloud/releases-hanami.git"
-git push --quiet -u "https://${GITHUB_TOKEN}@github.com/sacloud/releases-hanami.git" :${VERSION} >& /dev/null
+git push -u "https://${GITHUB_TOKEN}@github.com/sacloud/releases-hanami.git" :${VERSION}
 
 echo "Tagging ${VERSION} on github.com/sacloud/releases-hanami.git"
-git push --quiet -u "https://${GITHUB_TOKEN}@github.com/sacloud/releases-hanami.git" ${VERSION} >& /dev/null
+git push -u "https://${GITHUB_TOKEN}@github.com/sacloud/releases-hanami.git" ${VERSION}
 exit 0
