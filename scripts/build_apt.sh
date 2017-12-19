@@ -14,7 +14,7 @@ set -x
     mkdir -p package/deb-build
     cp -r package/deb package/deb-build/
 
-    unzip -oq bin/usacloud_linux-amd64.zip -d bin/
+    unzip -oq bin/hanami_linux-amd64.zip -d bin/
     mv bin/hanami package/deb-build/deb/debian/hanami.bin
     cp contrib/completion/bash/hanami package/deb-build/deb/debian/hanami_bash_completion
     cp package/dummy-empty.tar.gz package/deb-build/hanami_${_VERSION}.orig.tar.gz
